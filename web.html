@@ -27,7 +27,7 @@
   </div>
 </nav>
 
-  <audio src="videoplayback.mp4" autoplay loop muted preload="auto" style="display:none;"></audio>
+  <audio id="bgMusic" src="videoplayback.mp3" preload="auto" loop></audio>
 
   <header class="hero-section">
     <div class="hero-content">
@@ -122,4 +122,35 @@
 
   <section class="contact" id="book">
     <h2>Ready to Hear N Heal?</h2>
-    <p class
+    <script>
+function unmuteAudio() {
+    const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("unmuteBtn");
+
+    music.muted = false;
+    music.volume = 0.7;
+
+    music.play()
+      .then(() => {
+        btn.textContent = "Music Enabled ✓";
+        btn.disabled = true;
+      })
+      .catch(err => {
+        console.log("Play blocked:", err);
+      });
+}
+
+
+document.body.addEventListener("click", () => {
+    const music = document.getElementById("bgMusic");
+    if (music.paused) {
+        music.play().catch(() => {});
+    }
+}, { once: true });
+
+
+function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
+  </section></body></html>
